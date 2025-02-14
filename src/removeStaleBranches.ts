@@ -311,6 +311,19 @@ export async function removeStaleBranches(
 
     if (operations >= params.operationsPerRun) {
       console.log("Stopping after " + operations + " operations");
+      const actionSummary = [
+        `${summary.scanned} scanned`,
+        `${icons.skip} ${summary.skip} skipped`,
+        `${icons["mark stale"]} ${summary["mark stale"]} marked stale`,
+        `${icons["keep stale"]} ${summary["keep stale"]} kept stale`,
+        `${icons.remove} ${summary.remove} removed`,
+      ].join(", ");
+      core.setOutput("branches_scanned", summary.scanned);
+      core.setOutput("branches_marked_stale", summary["mark stale"]);
+      core.setOutput("branches_kept_stale", summary["keep stale"]);
+      core.setOutput("branches_removed", summary.remove);
+      core.setOutput("branches_skipped", summary.skip);
+      console.log(`Summary:  ${actionSummary}`);
       return;
     }
   }
@@ -322,5 +335,10 @@ export async function removeStaleBranches(
     `${icons["keep stale"]} ${summary["keep stale"]} kept stale`,
     `${icons.remove} ${summary.remove} removed`,
   ].join(", ");
+  core.setOutput("branches_scanned", summary.scanned);
+  core.setOutput("branches_marked_stale", summary["mark stale"]);
+  core.setOutput("branches_kept_stale", summary["keep stale"]);
+  core.setOutput("branches_removed", summary.remove);
+  core.setOutput("branches_skipped", summary.skip);
   console.log(`Summary:  ${actionSummary}`);
 }
