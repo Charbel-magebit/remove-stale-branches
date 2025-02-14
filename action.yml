@@ -55,3 +55,6 @@ inputs:
     description: "Whether to ignore branches with open pull requests."
     default: "false"
     required: false
+outputs:
+  testoutput:
+    description: "Test output value"
