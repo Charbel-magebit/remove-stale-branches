@@ -310,8 +310,8 @@ export async function removeStaleBranches(
     }
 
     if (operations >= params.operationsPerRun) {
-      console.log("Stopping after " + operations + " operations");
-      console.log("Setting test output");
+      console.log("Setting test output and stopping");
+
       core.setOutput("testoutput", "test output");
 
       const actionSummary = [
